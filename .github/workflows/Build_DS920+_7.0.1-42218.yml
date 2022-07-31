@@ -71,8 +71,8 @@ jobs:
 
       - name: 打包镜像文件
         run: |
-          cd /home/runner/redpill-load
-          zip -r ${{matrix.version}}-${{steps.date.outputs.today}}.zip ./images/*.img
+          cd /home/runner/redpill-load/images
+          zip -r ${{matrix.version}}-${{steps.date.outputs.today}}.zip ./*.img
 
 
       - name: 上传引导镜像到 Github Releases
@@ -84,7 +84,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            /home/runner/redpill-load/*.zip
+            /home/runner/redpill-load/images/*.zip
             /home/runner/redpill-load/images/*.img
             
       - name: 删除旧的 Release 项目
