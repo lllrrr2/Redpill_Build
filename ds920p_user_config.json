@@ -1,18 +1,18 @@
 {
-  	"extra_cmdline": {
-    	"pid": "0x5567", 
-	    "vid": "0x0781", 
-    	"sn": "2040SBRD42CP2", 
-	    "mac1": "001132CABFFF", 
-    	"SataPortMap": "22", 
-	    "DiskIdxMap": "0002", 
-    	"mac2": "001132CAC000", 
-	    "netif_num": 2
-  	}, 
-  	"synoinfo": {
+	"extra_cmdline": {
+		"pid": "0x5567", 
+		"vid": "0x0781", 
+		"sn": "2040SBRD42CP2", 
+		"mac1": "001132CABFFF", 
+		"SataPortMap": "22", 
+		"DiskIdxMap": "0002", 
+		"mac2": "001132CAC000", 
+		"netif_num": 2
+	}, 
+	"synoinfo": {
 		"internalportcfg": "0xffff",
 		"maxlanport": "7"
-    },
-    "ramdisk_copy": {},
-    "extensions": []
+	},
+	"ramdisk_copy": {},
+	"extensions": []
 }
