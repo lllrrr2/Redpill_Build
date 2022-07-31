@@ -77,7 +77,7 @@ jobs:
           body: ${{steps.desc.outputs.description}}
           draft: false
           prerelease: false
-          files: |
+          path: |
             /home/runner/redpill-load/images/*.img
             
       - name: 删除旧的 Release 项目
