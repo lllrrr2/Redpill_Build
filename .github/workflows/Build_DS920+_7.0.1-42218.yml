@@ -68,7 +68,13 @@ jobs:
         run: |
           cd /home/runner/redpill-load
           sudo BRP_JUN_MOD=1 BRP_DEBUG=1 BRP_USER_CFG=ds920p_user_config.json ./build-loader.sh '${{matrix.platform}}' '${{matrix.version}}'
-          
+
+      - name: 打包镜像文件
+        run: |
+          cd /home/runner/redpill-load
+          zip -r ${{matrix.version}}-${{steps.date.outputs.today}}.zip ./images/*.img
+
+
       - name: 上传引导镜像到 Github Releases
         uses: softprops/action-gh-release@v1
         with:
@@ -77,8 +83,8 @@ jobs:
           body: ${{steps.desc.outputs.description}}
           draft: false
           prerelease: false
-          path: |
-            /home/runner/redpill-load/images/*.img
+          files: |
+            /home/runner/redpill-load/*.zip
             
       - name: 删除旧的 Release 项目
         uses: dev-drprasad/delete-older-releases@v0.2.0
