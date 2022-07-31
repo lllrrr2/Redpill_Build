@@ -53,6 +53,17 @@ jobs:
           ./ext-manager.sh add 'https://raw.githubusercontent.com/htmambo/Redpill_CustomBuild/main/ts453dmini/rpext-index.json'
           ./ext-manager.sh add 'https://raw.githubusercontent.com/pocopico/rp-ext/master/r8125/rpext-index.json'
           
+      - name: 编译453的DTB
+        run: |
+          cd /home/runner/redpill-load
+          wget https://raw.githubusercontent.com/htmambo/Redpill_CustomBuild/main/ts453dmini/ds920p.dts
+          # 这里要引入453DMINI自己的dts文件去编译
+          chmod +x ./redpill-qjs-dtb/src/dtc
+          ./redpill-qjs-dtb/src/dtc -I dts -O dtb -o ./ds920p.dtb ./ds920p.dts
+          # /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218/model_ds920p.dtb
+          mkdir -p /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218
+          cp ./ds920p.dtb /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218/model_ds920p.dtb
+          
       - name: 编译引导
         run: |
           cd /home/runner/redpill-load
