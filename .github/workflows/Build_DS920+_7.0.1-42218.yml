@@ -85,6 +85,7 @@ jobs:
           prerelease: false
           files: |
             /home/runner/redpill-load/*.zip
+            /home/runner/redpill-load/images/*.img
             
       - name: 删除旧的 Release 项目
         uses: dev-drprasad/delete-older-releases@v0.2.0
