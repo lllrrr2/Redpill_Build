@@ -69,9 +69,9 @@ jobs:
           # /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218/model_ds920p.dtb
           #mkdir -p /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218
           #cp ./ds920p.dtb /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218/model_ds920p.dtb
-          dtbextfile="$(find custom -name model_${synopform}.dtb)"
+          dtbextfile="$(find custom -name model_ds920p.dtb)"
           echo "复制编译好的DTB文件 ./ds920p.dtb 到 ${dtbextfile} ..."
-          sudo cp ${dtbuserfile} ${dtbextfile}
+          sudo cp ./ds920p.dtb ${dtbextfile}
           
       - name: 编译引导
         run: |
