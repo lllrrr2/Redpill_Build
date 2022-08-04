@@ -20,7 +20,7 @@ jobs:
         include:
           - platform: DS920+
             version: 7.0.1-42218
-            machine: TS453Dmini
+            machine: TS453DMINI
 
     steps:
       - name: 检出项目文件
@@ -76,7 +76,7 @@ jobs:
       - name: 编译引导
         run: |
           cd /home/runner/redpill-load
-          sed -i 's/\/images\/redpill\-/\/images\/ts453dmini\-/g' ./build-loader.sh
+          sed -i 's/\/images\/redpill\-/\/images\/TS453DMINI\-/g' ./build-loader.sh
           sudo BRP_JUN_MOD=1 BRP_DEBUG=1 BRP_USER_CFG=ds920p_user_config.json ./build-loader.sh '${{matrix.platform}}' '${{matrix.version}}'
 
       - name: 打包镜像文件
