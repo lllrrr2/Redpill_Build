@@ -87,7 +87,7 @@ jobs:
       - name: 上传引导镜像到 Github Releases
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: Redpill-load@${{steps.date.outputs.now}}
+          tag_name: Build-${{steps.date.outputs.now}}
           name: ${{matrix.machine}} ${{matrix.platform}} ${{matrix.version}} Build ${{steps.date.outputs.today}}
           body: ${{steps.desc.outputs.description}}
           draft: false
