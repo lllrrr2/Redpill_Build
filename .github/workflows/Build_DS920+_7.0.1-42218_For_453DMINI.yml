@@ -28,7 +28,9 @@ jobs:
         
       - name: 获取当前时间
         id: date
-        run: echo "::set-output name=today::$(date +'%Y-%m-%d %H:%M:%S')"
+        run: |
+          echo "::set-output name=today::$(date +'%Y-%m-%d')"
+          echo "::set-output name=now::$(date +'%Y-%m-%d')"
         
       - name: 获取项目描述
         id: desc
@@ -79,14 +81,14 @@ jobs:
       - name: 打包镜像文件
         run: |
           cd /home/runner/redpill-load/images
-          zip -r ${{matrix.machine}}-${{matrix.platform}}-${{matrix.version}}-${{steps.date.outputs.today}}.zip ./*.img
+          zip -r ${{matrix.machine}}-${{matrix.platform}}-${{matrix.version}}-${{steps.date.outputs.now}}.zip ./*.img
 
 
       - name: 上传引导镜像到 Github Releases
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: Redpill-load
-          name: ${{matrix.machine}} ${{matrix.platform}} ${{matrix.version}} Build ${{steps.date.outputs.today}}
+          tag_name: Redpill-load@${{steps.date.outputs.now}}
+          name: ${{matrix.machine}} ${{matrix.platform}} ${{matrix.version}} Build ${{steps.date.outputs.now}}
           body: ${{steps.desc.outputs.description}}
           draft: false
           prerelease: false
