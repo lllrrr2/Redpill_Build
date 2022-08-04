@@ -28,7 +28,7 @@ jobs:
         
       - name: 获取当前时间
         id: date
-        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d %H:%M:%S')"
         
       - name: 获取项目描述
         id: desc
@@ -94,17 +94,10 @@ jobs:
             /home/runner/redpill-load/images/*.zip
             /home/runner/redpill-load/images/*.img
             
-      - name: 删除旧的 Release 项目
-        uses: dev-drprasad/delete-older-releases@v0.2.0
-        with:
-          repo: htmambo/Redpill_Build
-          keep_latest: 1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-#      - name: 上传引导镜像到 Github Actions
-#        uses: actions/upload-artifact@v3
+#      - name: 删除旧的 Release 项目
+#        uses: dev-drprasad/delete-older-releases@v0.2.0
 #        with:
-#          name: ${{matrix.platform}} ${{matrix.version}}
-#          path: /home/runner/redpill-load/images/*.img
-#          if-no-files-found: error
+#          repo: htmambo/Redpill_Build
+#          keep_latest: 1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
