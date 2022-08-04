@@ -52,19 +52,26 @@ jobs:
           ./ext-manager.sh add 'https://github.com/jumkey/redpill-load/raw/develop/redpill-misc/rpext-index.json'
           ./ext-manager.sh add 'https://github.com/pocopico/redpill-load/raw/develop/redpill-acpid/rpext-index.json'
           ./ext-manager.sh add 'https://raw.githubusercontent.com/pocopico/rp-ext/master/r8125/rpext-index.json'
-          ./ext-manager.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/redpill-dtb-static/rpext-index.json
-          ./ext-manager.sh _update_platform_exts ${synomodel} redpill-dtb-static
           
       - name: 编译453的DTB
         run: |
           cd /home/runner/redpill-load
+          echo "加载原DTB驱动"
+          ./ext-manager.sh add https://raw.githubusercontent.com/pocopico/rp-ext/master/redpill-dtb-static/rpext-index.json
+          echo "更新原DTB驱动"
+          ./ext-manager.sh _update_platform_exts ds920p_42218 redpill-dtb-static
+          echo "下载DTS文件"
           wget https://raw.githubusercontent.com/htmambo/Redpill_CustomBuild/main/ts453dmini/ds920p.dts
           # 这里要引入453DMINI自己的dts文件去编译
           chmod +x ./redpill-qjs-dtb/src/dtc
+          echo "编译DTS为DTB"
           ./redpill-qjs-dtb/src/dtc -I dts -O dtb -o ./ds920p.dtb ./ds920p.dts
           # /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218/model_ds920p.dtb
-          mkdir -p /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218
-          cp ./ds920p.dtb /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218/model_ds920p.dtb
+          #mkdir -p /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218
+          #cp ./ds920p.dtb /home/runner/redpill-load/custom/extensions/redpill-dtb-static/ds920p_42218/model_ds920p.dtb
+          dtbextfile="$(find custom -name model_${synopform}.dtb)"
+          echo "复制编译好的DTB文件 ./ds920p.dtb 到 ${dtbextfile} ..."
+          sudo cp ${dtbuserfile} ${dtbextfile}
           
       - name: 编译引导
         run: |
