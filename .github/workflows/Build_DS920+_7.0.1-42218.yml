@@ -72,7 +72,7 @@ jobs:
       - name: 打包镜像文件
         run: |
           cd /home/runner/redpill-load/images
-          zip -r ${{matrix.platform}}-${{matrix.version}}-${{steps.date.outputs.today}}.zip ./*.img
+          zip -r redpill-${{matrix.platform}}-${{matrix.version}}-${{steps.date.outputs.today}}.zip ./*.img
 
 
       - name: 上传引导镜像到 Github Releases
