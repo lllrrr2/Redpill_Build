@@ -13,14 +13,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: 编译 "${{matrix.platform}} ${{matrix.version}} ${{matrix.machine}}"
+    name: 编译 "${{matrix.platform}} ${{matrix.version}}"
     strategy:
       fail-fast: false
       matrix:
         include:
           - platform: DS920+
             version: 7.0.1-42218
-            machine: TS453Dmini
 
     steps:
       - name: 检出项目文件
@@ -73,14 +72,14 @@ jobs:
       - name: 打包镜像文件
         run: |
           cd /home/runner/redpill-load/images
-          zip -r ${{matrix.machine}}-${{matrix.platform}}-${{matrix.version}}-${{steps.date.outputs.today}}.zip ./*.img
+          zip -r ${{matrix.platform}}-${{matrix.version}}-${{steps.date.outputs.today}}.zip ./*.img
 
 
       - name: 上传引导镜像到 Github Releases
         uses: softprops/action-gh-release@v1
         with:
           tag_name: Redpill-load
-          name: ${{matrix.machine}} ${{matrix.platform}} ${{matrix.version}} Build ${{steps.date.outputs.today}}
+          name: ${{matrix.platform}} ${{matrix.version}} Build ${{steps.date.outputs.today}}
           body: ${{steps.desc.outputs.description}}
           draft: false
           prerelease: false
